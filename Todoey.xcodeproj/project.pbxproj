@@ -7,23 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		835E3F57229A1788006C5858 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 835E3F56229A1788006C5858 /* Assets.xcassets */; };
 		837DBDC9229957EB0095887F /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837DBDC8229957EB0095887F /* CategoryViewController.swift */; };
 		839B4A2E2294286600D5F272 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 839B4A2C2294286600D5F272 /* DataModel.xcdatamodeld */; };
 		83DE73A022759887006F37EC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DE739F22759887006F37EC /* AppDelegate.swift */; };
 		83DE73A222759887006F37EC /* TodoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DE73A122759887006F37EC /* TodoListViewController.swift */; };
 		83DE73A522759887006F37EC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83DE73A322759887006F37EC /* Main.storyboard */; };
-		83DE73A722759887006F37EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83DE73A622759887006F37EC /* Assets.xcassets */; };
+		83DE73A722759887006F37EC /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83DE73A622759887006F37EC /* Icons.xcassets */; };
 		83DE73AA22759887006F37EC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83DE73A822759887006F37EC /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		835E3F56229A1788006C5858 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../../../../../../Users/chris/Downloads/AppIcons/Assets.xcassets; sourceTree = "<group>"; };
 		837DBDC8229957EB0095887F /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 		839B4A2D2294286600D5F272 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		83DE739C22759887006F37EC /* Todoey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Todoey.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83DE739F22759887006F37EC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		83DE73A122759887006F37EC /* TodoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListViewController.swift; sourceTree = "<group>"; };
 		83DE73A422759887006F37EC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		83DE73A622759887006F37EC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		83DE73A622759887006F37EC /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Icons.xcassets; sourceTree = "<group>"; };
 		83DE73A922759887006F37EC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		83DE73AB22759887006F37EC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -68,7 +70,8 @@
 		836D82B422832439009BA71F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				83DE73A622759887006F37EC /* Assets.xcassets */,
+				835E3F56229A1788006C5858 /* Assets.xcassets */,
+				83DE73A622759887006F37EC /* Icons.xcassets */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -163,7 +166,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				83DE73AA22759887006F37EC /* LaunchScreen.storyboard in Resources */,
-				83DE73A722759887006F37EC /* Assets.xcassets in Resources */,
+				83DE73A722759887006F37EC /* Icons.xcassets in Resources */,
+				835E3F57229A1788006C5858 /* Assets.xcassets in Resources */,
 				83DE73A522759887006F37EC /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -254,7 +258,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -307,7 +311,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";

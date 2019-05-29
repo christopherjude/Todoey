@@ -13,6 +13,14 @@ class TodoListViewController: UITableViewController {
     
     var itemArray = [Item]()
     
+    var textField = UITextField()
+    
+    var selectedCategory : Category?{
+        didSet{
+            getItems()
+        }
+    }
+    
     let defaults = UserDefaults.standard
     
     let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
@@ -22,7 +30,8 @@ class TodoListViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        getItems()
+        
+        
         
         
         
@@ -74,7 +83,7 @@ class TodoListViewController: UITableViewController {
     //Mark - Add New Items
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
         
-        var textField = UITextField()
+        
         
         let alert = UIAlertController(title: "Add New Todoey Item", message: "", preferredStyle: .alert)
         
@@ -84,8 +93,9 @@ class TodoListViewController: UITableViewController {
             
             
             let newItem = Item(context: self.context)
-            newItem.title = textField.text!
+            newItem.title = self.textField.text!
             newItem.done = false
+            newItem.parentCategory = self.selectedCategory
             
             self.itemArray.append(newItem)
             
@@ -95,13 +105,20 @@ class TodoListViewController: UITableViewController {
         
         alert.addTextField { (alertTextField) in
             alertTextField.placeholder = "Create New Item"
-            textField = alertTextField
+            self.textField = alertTextField
         }
         
         alert.addAction(action)
         
-        present(alert,animated: true,completion: nil)
+        present(alert,animated: true,completion: {
+            alert.view.superview?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.alertControllerBackgroundTapped)))
+            self.textField.becomeFirstResponder()
+        })
         
+    }
+    
+    @objc func alertControllerBackgroundTapped(){
+        self.dismiss(animated: true, completion: nil)
     }
     
     func saveItems(){
@@ -118,7 +135,15 @@ class TodoListViewController: UITableViewController {
         tableView.reloadData()
     }
 
-    func getItems(with request : NSFetchRequest<Item> = Item.fetchRequest()){
+    func getItems(with request : NSFetchRequest<Item> = Item.fetchRequest(), predicate: NSPredicate? = nil){
+        
+        let categoryPredicate = NSPredicate(format: "parentCategory.name MATCHES %@", selectedCategory!.name!)
+        
+        if let additionalPredicate = predicate {
+            request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [categoryPredicate,additionalPredicate])
+        }else{
+            request.predicate = categoryPredicate
+        }
         
             do{
                 itemArray = try context.fetch(request)
@@ -138,11 +163,11 @@ extension TodoListViewController: UISearchBarDelegate{
         
         let request : NSFetchRequest<Item> = Item.fetchRequest()
         
-        request.predicate = NSPredicate(format: "title CONTAINS[cd] %@", searchBar.text!)
+        let predicate = NSPredicate(format: "title CONTAINS[cd] %@", searchBar.text!)
         
         request.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
         
-        getItems(with : request)
+        getItems(with : request ,predicate: predicate)
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {

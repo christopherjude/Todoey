@@ -15,6 +15,8 @@ class CategoryViewController: UITableViewController {
     
     var categories = [Category]()
     
+    
+    
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     var textField = UITextField()
@@ -74,9 +76,10 @@ class CategoryViewController: UITableViewController {
         
         present(alert,animated: true,completion: {
             alert.view.superview?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.alertControllerBackgroundTapped)))
+            self.textField.becomeFirstResponder()
         })
         
-        textField.becomeFirstResponder()
+        
         
     }
     
@@ -112,7 +115,39 @@ class CategoryViewController: UITableViewController {
     //MARK: - TableView DataSource Methods
     
     //MARK: - TableView Delegate Methods
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "goToItems", sender: self)
+    }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destinationVC = segue.destination as! TodoListViewController
+        
+        if let indexPath = tableView.indexPathForSelectedRow {
+            destinationVC.selectedCategory = categories[indexPath.row]
+        }
+    }
     //MARK: - Data Manipulation Methods
     
+}
+extension CategoryViewController: UISearchBarDelegate{
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        let request : NSFetchRequest<Category> = Category.fetchRequest()
+        
+        request.predicate = NSPredicate(format: "name CONTAINS[cd] %@", searchBar.text!)
+        
+        request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+        
+        getCategories(with : request)
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchBar.text?.count == 0{
+            getCategories()
+            DispatchQueue.main.async {
+                searchBar.resignFirstResponder()
+            }
+        }else{
+            searchBarSearchButtonClicked(searchBar)
+        }
+    }
 }
